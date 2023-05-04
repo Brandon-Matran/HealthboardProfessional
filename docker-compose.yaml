@@ -1,0 +1,28 @@
+volumes:
+  healthcare-professional-data:
+    external: true
+
+
+version: '3.8'
+services:
+  app:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - 8080:8080
+    volumes:
+    - /server/app/node_modules
+
+  postgres:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    ports:
+      - 5432:5432
+    volumes:
+      - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql

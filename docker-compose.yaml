@@ -26,3 +26,4 @@ services:
       - 5432:5432
     volumes:
       - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
+      - healthcare-professional-data:/var/lib/postgresql/data

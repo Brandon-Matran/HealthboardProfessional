@@ -3,13 +3,15 @@
 FROM node:18.16-alpine3.17
 
 #App directory to build
-WORKDIR /server/app
+WORKDIR /usr/src/app
 #Copy package.json files
 COPY package*.json ./
 #Run npm install to install node modules
-RUN npm install
+COPY tables tables
 
-COPY . .
+COPY app.js app.js
+
+RUN npm install
 
 EXPOSE 8080
 

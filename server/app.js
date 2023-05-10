@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 const express = require("express");
 const app = express();
-const { Patient_User } = require("./tables/userTables");
+const { Patient_User, Healthcare_Provider } = require("./tables/userTables");
 const sequelize = new Sequelize("root", "root", "root", {
   host: "postgres",
   dialect: "postgres",
@@ -21,6 +21,14 @@ Patient_User.sync()
   })
   .catch((error) => {
     console.log(`Unable to create patientUser table: ${error}`);
+  });
+
+Healthcare_Provider.sync()
+  .then(() => {
+    console.log("Healthcare table created successfully");
+  })
+  .catch((err) => {
+    console.log(`Unable to create patient ${err}`);
   });
 
 try {

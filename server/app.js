@@ -2,6 +2,8 @@ const { Sequelize } = require("sequelize");
 const express = require("express");
 const app = express();
 const { Patient_User, Healthcare_Provider } = require("./tables/userTables");
+const {BasicMetabolicPanel} = require("./tables/LabTables")
+
 const sequelize = new Sequelize("root", "root", "root", {
   host: "postgres",
   dialect: "postgres",
@@ -30,6 +32,14 @@ Healthcare_Provider.sync()
   .catch((err) => {
     console.log(`Unable to create patient ${err}`);
   });
+
+BasicMetabolicPanel.sync()
+.then(()=> {
+  console.log("BMP table created successfully");
+})
+.catch((err) => {
+  console.log(`Unable to create table ${err}`);
+});
 
 try {
   sequelize.authenticate();

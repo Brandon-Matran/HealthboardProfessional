@@ -93,23 +93,23 @@ const Healthcare_Provider = sequelize.define(
   }
 );
 
-async function createHealthCareProvider() {
-  try {
-    const healthCareProvider = await Healthcare_Provider.create({
-      firstName: "John",
-      lastName: "Doe",
-      email: "john@doe.com",
-      password: "password",
-      role: 'doctor',
-    });
-    console.log(`${healthCareProvider} created`)
-    return healthCareProvider;
-  } catch (err) {
-    console.log(err);
-  }
-}
+// async function createHealthCareProvider() {
+//   try {
+//     const healthCareProvider = await Healthcare_Provider.create({
+//       firstName: "John",
+//       lastName: "Doe",
+//       email: "john@doe.com",
+//       password: "password",
+//       role: 'doctor',
+//     });
+//     console.log(`${healthCareProvider} created`)
+//     return healthCareProvider;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
 
-createHealthCareProvider();
+// createHealthCareProvider();
 
 
 module.exports = { Patient_User, Healthcare_Provider };

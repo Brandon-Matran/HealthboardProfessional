@@ -2,7 +2,11 @@ const { Sequelize } = require("sequelize");
 const express = require("express");
 const app = express();
 const { Patient_User, Healthcare_Provider } = require("./tables/userTables");
-const {BasicMetabolicPanel} = require("./tables/LabTables")
+const {
+  BasicMetabolicPanel,
+  CompleteBloodCount,
+  ArterialBloodGas,
+} = require("./tables/LabTables");
 
 const sequelize = new Sequelize("root", "root", "root", {
   host: "postgres",
@@ -34,12 +38,28 @@ Healthcare_Provider.sync()
   });
 
 BasicMetabolicPanel.sync()
-.then(()=> {
-  console.log("BMP table created successfully");
-})
-.catch((err) => {
-  console.log(`Unable to create table ${err}`);
-});
+  .then(() => {
+    console.log("BMP table created successfully");
+  })
+  .catch((err) => {
+    console.log(`Unable to create table ${err}`);
+  });
+
+CompleteBloodCount.sync()
+  .then(() => {
+    console.log("Complete blood count table created successfully");
+  })
+  .catch((err) => {
+    console.log(`Unable to create blood count table ${err}`);
+  });
+
+ArterialBloodGas.sync()
+  .then(() => {
+    console.log(`Successfully created ABG table`);
+  })
+  .catch((err) => {
+    console.log(`Failed to create ABG table ${err}`);
+  });
 
 try {
   sequelize.authenticate();

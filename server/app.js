@@ -7,6 +7,7 @@ const {
   CompleteBloodCount,
   ArterialBloodGas,
 } = require("./tables/LabTables");
+const { medicationTable } = require("./tables/medicationTable");
 
 const sequelize = new Sequelize("root", "root", "root", {
   host: "postgres",
@@ -59,6 +60,15 @@ ArterialBloodGas.sync()
   })
   .catch((err) => {
     console.log(`Failed to create ABG table ${err}`);
+  });
+
+medicationTable
+  .sync()
+  .then(() => {
+    console.log(`Medication table successfully created`);
+  })
+  .catch((err) => {
+    console.log(err);
   });
 
 try {

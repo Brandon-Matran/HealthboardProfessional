@@ -170,22 +170,22 @@ const ArterialBloodGas = sequelize.define(
 
 ArterialBloodGas.belongsTo(Patient_User, { foreignKey: "id" });
 
-async function createABG() {
-  const patientId = "b025b309-a45a-45ab-8f53-00ccebee1841";
-  try {
-    await sequelize.sync();
-    const abg = ArterialBloodGas.create({
-      ph: 7.35,
-      paCo2: 35,
-      paO2: 99,
-      oxygenSaturation: 96,
-      bicarbonate: 26,
-      patientId: patientId,
-    });
-    console.log(`Successfully created ${abg}`);
-  } catch (err) {
-    console.log(err);
-  }
-}
-createABG();
+// async function createABG() {
+//   const patientId = "b025b309-a45a-45ab-8f53-00ccebee1841";
+//   try {
+//     await sequelize.sync();
+//     const abg = ArterialBloodGas.create({
+//       ph: 7.35,
+//       paCo2: 35,
+//       paO2: 99,
+//       oxygenSaturation: 96,
+//       bicarbonate: 26,
+//       patientId: patientId,
+//     });
+//     console.log(`Successfully created ${abg}`);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+// createABG();
 module.exports = { BasicMetabolicPanel, CompleteBloodCount, ArterialBloodGas };

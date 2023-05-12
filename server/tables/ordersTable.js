@@ -53,27 +53,27 @@ const ordersTable = sequelize.define("Orders", {
 ordersTable.belongsTo(Patient_User, {foreignKey: "patientId"})
 ordersTable.belongsTo(Healthcare_Provider, {foreignKey: "providerId"})
 
-async function createOrder() {
-    const patientId = "b025b309-a45a-45ab-8f53-00ccebee1841"
-    const providerId = 1
-    try {
-        await sequelize.sync()
-        const order = await ordersTable.create({
-            patientId: patientId,
-            providerId: providerId,
-            order: "NPO until surgery in the AM 5/12",
-            orderTime: "15:00",
-            orderDate: sequelize.literal("CURRENT_TIMESTAMP"),
-            fulfillmentTime: "00:00",
-            urgent: true,
-        })
-        console.log(`Successfully created ${order}`)
-    }
-    catch (error) {
-        console.log(error)
-    }
-}
+// async function createOrder() {
+//     const patientId = "b025b309-a45a-45ab-8f53-00ccebee1841"
+//     const providerId = 1
+//     try {
+//         await sequelize.sync()
+//         const order = await ordersTable.create({
+//             patientId: patientId,
+//             providerId: providerId,
+//             order: "NPO until surgery in the AM 5/12",
+//             orderTime: "15:00",
+//             orderDate: sequelize.literal("CURRENT_TIMESTAMP"),
+//             fulfillmentTime: "00:00",
+//             urgent: true,
+//         })
+//         console.log(`Successfully created ${order}`)
+//     }
+//     catch (error) {
+//         console.log(error)
+//     }
+// }
 
-createOrder()
+// createOrder()
 
 module.exports = {ordersTable}

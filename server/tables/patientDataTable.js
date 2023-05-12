@@ -93,27 +93,27 @@ const patientDetails = sequelize.define('patientDetails', {
 
 patientDetails.belongsTo(Patient_User, {foreignKey: "patientId"})
 
-async function createPatient() {
-    const patientId = "b025b309-a45a-45ab-8f53-00ccebee1841"
-    try {
-        await sequelize.sync()
-        const detail = await patientDetails.create({
-            patientId: patientId,
-            height: "55",
-            heightType: "inches",
-            weight: "140",
-            weightType: "lbs",
-            age: 50,
-            sex: "male",
-            medicalHistory: "History of diabetes, gout, and obesity."
-        })
-        console.log(`Patient ${detail} created`)
-    }
-    catch (err) {
-        console.log(err)
-    }
-}
-createPatient()
+// async function createPatient() {
+//     const patientId = "b025b309-a45a-45ab-8f53-00ccebee1841"
+//     try {
+//         await sequelize.sync()
+//         const detail = await patientDetails.create({
+//             patientId: patientId,
+//             height: "55",
+//             heightType: "inches",
+//             weight: "140",
+//             weightType: "lbs",
+//             age: 50,
+//             sex: "male",
+//             medicalHistory: "History of diabetes, gout, and obesity."
+//         })
+//         console.log(`Patient ${detail} created`)
+//     }
+//     catch (err) {
+//         console.log(err)
+//     }
+// }
+// createPatient()
 
 
 module.exports = {vitalsTable, patientDetails}

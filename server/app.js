@@ -1,6 +1,5 @@
+// Establish connections to tables
 const { Sequelize } = require("sequelize");
-const express = require("express");
-const app = express();
 const { Patient_User, Healthcare_Provider } = require("./tables/userTables");
 const {
   BasicMetabolicPanel,
@@ -11,10 +10,19 @@ const { medicationTable } = require("./tables/medicationTable");
 const { vitalsTable, patientDetails } = require("./tables/patientDataTable");
 const { ordersTable } = require("./tables/ordersTable");
 
+//Establish connections to routes
+const express = require("express");
+const userRouter = require("./routes/users")
+const app = express();
+app.use("/", userRouter);
+
+// Establish sql database
 const sequelize = new Sequelize("root", "root", "root", {
   host: "postgres",
   dialect: "postgres",
 });
+
+// Routes
 
 app.get("/", (req, res) => {
   try {
@@ -23,6 +31,9 @@ app.get("/", (req, res) => {
     console.log(err);
   }
 });
+
+
+// Tables
 
 Patient_User.sync()
   .then(() => {

@@ -8,7 +8,7 @@ const {
   ArterialBloodGas,
 } = require("./tables/LabTables");
 const { medicationTable } = require("./tables/medicationTable");
-const { vitalsTable } = require("./tables/patientDataTable");
+const { vitalsTable, patientDetails } = require("./tables/patientDataTable");
 
 const sequelize = new Sequelize("root", "root", "root", {
   host: "postgres",
@@ -80,7 +80,15 @@ vitalsTable
   .catch((err) => {
     console.log(err);
   });
-  
+
+patientDetails
+  .sync()
+  .then(() => {
+    console.log(`Patient details successfully created`);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 try {
   sequelize.authenticate();
   console.log("Connection to the database has been established successfully.");

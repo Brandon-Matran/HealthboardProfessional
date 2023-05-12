@@ -2,7 +2,10 @@ const { Sequelize } = require("sequelize");
 const sequelize = new Sequelize("postgres://root:root@postgres:5432/root");
 const { Patient_User, Healthcare_Provider } = require("../tables/userTables");
 const express = require("express");
+const bodyParser = require("body-parser");
 const router = express.Router();
+
+router.use(bodyParser.json());
 
 
 // Patient Routes (GET, POST, DELETE, PUT)
@@ -28,6 +31,20 @@ router.get("/patients/:id", async (req, res) => {
         console.log(err);
 }
 })
+
+router.post("/patients", async (req, res) => {
+    try {
+        const user = await Patient_User.create({
+            firstName:req.body.firstName,
+            lastName: req.body.lastName,
+            birthDate: req.body.birthDate,
+            password: req.body.password
+    })
+        return res.json(user);
+
+    } catch (err) {
+        console.log(err);
+    }})
 
 router.get("/staff", async (req, res) => {
   try {

@@ -61,6 +61,12 @@ Patient_User.prototype.validPassword = function (password) {
 const Healthcare_Provider = sequelize.define(
   "Healthcare_Provider",
   {
+    id : {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -81,7 +87,8 @@ const Healthcare_Provider = sequelize.define(
     role: {
       type: DataTypes.ENUM('doctor', 'nurse'),
       allowNull: false,
-    }
+    },
+
   },
   {
     freezeTableName: true,
@@ -93,23 +100,23 @@ const Healthcare_Provider = sequelize.define(
   }
 );
 
-// async function createHealthCareProvider() {
-//   try {
-//     const healthCareProvider = await Healthcare_Provider.create({
-//       firstName: "John",
-//       lastName: "Doe",
-//       email: "john@doe.com",
-//       password: "password",
-//       role: 'doctor',
-//     });
-//     console.log(`${healthCareProvider} created`)
-//     return healthCareProvider;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
+async function createHealthCareProvider() {
+  try {
+    const healthCareProvider = await Healthcare_Provider.create({
+      firstName: "John",
+      lastName: "Doe",
+      email: "john@doe.com",
+      password: "password",
+      role: 'doctor',
+    });
+    console.log(`${healthCareProvider} created`)
+    return healthCareProvider;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-// createHealthCareProvider();
+createHealthCareProvider();
 
 
 module.exports = { Patient_User, Healthcare_Provider };

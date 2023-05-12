@@ -9,6 +9,7 @@ const {
 } = require("./tables/LabTables");
 const { medicationTable } = require("./tables/medicationTable");
 const { vitalsTable, patientDetails } = require("./tables/patientDataTable");
+const { ordersTable } = require("./tables/ordersTable");
 
 const sequelize = new Sequelize("root", "root", "root", {
   host: "postgres",
@@ -85,6 +86,15 @@ patientDetails
   .sync()
   .then(() => {
     console.log(`Patient details successfully created`);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+ordersTable
+  .sync()
+  .then(() => {
+    console.log(`Orders table successfully created`);
   })
   .catch((err) => {
     console.log(err);

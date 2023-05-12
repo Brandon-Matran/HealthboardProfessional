@@ -4,6 +4,8 @@ const { Patient_User, Healthcare_Provider } = require("../tables/userTables");
 const express = require("express");
 const router = express.Router();
 
+
+// Patient Routes (GET, POST, DELETE, PUT)
 router.get("/patients", async (req, res) => {
   try {
     const users = await Patient_User.findAll({
@@ -15,6 +17,17 @@ router.get("/patients", async (req, res) => {
     console.log(err);
   }
 });
+
+router.get("/patients/:id", async (req, res) => {
+    try {
+        const user = await Patient_User.findByPk(req.params.id,
+            {attributes: ["id", "firstName", "lastName"]});
+            return res.json(user);
+    }
+    catch (err) {
+        console.log(err);
+}
+})
 
 router.get("/staff", async (req, res) => {
   try {

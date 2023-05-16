@@ -9,11 +9,13 @@ const {
 const { medicationTable } = require("./tables/medicationTable");
 const { vitalsTable, patientDetails } = require("./tables/patientDataTable");
 const { ordersTable } = require("./tables/ordersTable");
-
 //Establish connections to routes
 const express = require("express");
-const userRouter = require("./routes/users")
 const app = express();
+
+
+
+const userRouter = require("./routes/users")
 app.use("/", userRouter);
 
 // Establish sql database

@@ -52,6 +52,22 @@ router.post("/patients", async (req, res) => {
   }
 });
 
+router.put("/patients/:id", async (req, res) => {
+  try {
+    const patient = await Patient_User.findByPk(req.params.id);
+    await patient.update({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+    });
+    console.log(
+      `${patient.firstName} ${patient.lastName} successfully updated`
+    );
+    return res.json(patient);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 router.delete("/patients/:id", async (req, res) => {
   try {
     const user = await Patient_User.findByPk(req.params.id);
@@ -111,23 +127,43 @@ router.post("/staff", async (req, res) => {
 router.put("/staff/:id", async (req, res) => {
   try {
     const staff = await Healthcare_Provider.findByPk(req.params.id);
-    console.log(staff.id);
-    await staff.update({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-      role: req.body.role,
-    }, {
-      where: {
-        id: staff
+    await staff.update(
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        role: req.body.role,
+      },
+      {
+        where: {
+          id: staff,
+        },
       }
-    });
+    );
     console.log(`${staff} successfully updated`);
-    return res.json(staff)
+    return res.json(staff);
   } catch (err) {
     console.error(err);
     res.status(500).send("An error occurred while updating staff.");
+  }
+});
+
+router.delete("/staff/:id", async (req, res) => {
+  try {
+    const staff = await Healthcare_Provider.findByPk(req.params.id);
+    if (staff) {
+      staff.destroy();
+      return res.json(
+        `${staff.firstName} ${staff.lastName} successfully deleted`
+      );
+    } else if (staff === undefined || staff === undefined) {
+      return res.json(`That staff member does not exist`);
+    } else if (res.status === 404) {
+      return res.json("You shouldnt be here");
+    }
+  } catch (err) {
+    console.error(err);
   }
 });
 

@@ -18,6 +18,9 @@ const app = express();
 const userRouter = require("./routes/users")
 app.use("/", userRouter);
 
+const labRouter = require("./routes/labTests")
+app.use("/", labRouter);
+
 // Establish sql database
 const sequelize = new Sequelize("root", "root", "root", {
   host: "postgres",

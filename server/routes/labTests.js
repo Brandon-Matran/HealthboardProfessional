@@ -68,9 +68,21 @@ router.put("/labs/:id", async (req, res) => {
       bun: req.body.bun,
       patientId: req.body.patientId,
     });
-    return res.json(lab)
+    return res.json(lab);
   } catch (err) {
     console.error(err);
   }
 });
+
+router.delete("/labs/:id", async (req, res) => {
+  try {
+    const lab = await BasicMetabolicPanel.findByPk(req.params.id);
+    await lab.destroy();
+    console.log(`${lab.id} destroyed`);
+    return res.json(`Lab with id ${lab.id} deleted successfully`);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;

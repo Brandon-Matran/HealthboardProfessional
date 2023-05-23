@@ -57,16 +57,16 @@ medicationTable.belongsTo(Patient_User, {foreignKey: 'patientId'})
 //     const patientId = "b025b309-a45a-45ab-8f53-00ccebee1841"
 //     try {
 //         await sequelize.sync()
-//         const med = await medicationTable.create({
-//             patientId: patientId,
-//             medication: "Heparin",
-//             dosage: 5000,
-//             dosageType: "units",
-//             route:  "IV",
-//             start: "2023-11-05",
-//             end: "2023-11-10",
-//             frequency: "daily",
-//         })
+        // const med = await medicationTable.create({
+        //     patientId: patientId,
+        //     medication: "Heparin",
+        //     dosage: 5000,
+        //     dosageType: "units",
+        //     route:  "IV",
+        //     start: "2023-11-05",
+        //     end: "2023-11-10",
+        //     frequency: "daily",
+        // })
 //         console.log(`Created ${med}`)
 //     } catch (err) {
 //         console.log(err)

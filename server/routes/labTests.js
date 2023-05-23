@@ -11,7 +11,7 @@ const {
 } = require("../tables/LabTables");
 router.use(bodyParser.json());
 
-// Basic Metabolic Panel Routes [GET, POST, PUT, DELETE]
+// Basic Metabolic Panel Routes [GET, POST, PUT, DELETE] //
 router.get("/labs", async (req, res) => {
   try {
     const labs = await BasicMetabolicPanel.findAll();

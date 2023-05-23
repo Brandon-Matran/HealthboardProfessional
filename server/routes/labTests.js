@@ -24,13 +24,34 @@ router.get("/labs", async (req, res) => {
 router.get("/labs/:patientId", async (req, res) => {
   try {
     const labs = await BasicMetabolicPanel.findAndCountAll({
-        where: {
-            patientId: req.params.patientId
-        }
+      where: {
+        patientId: req.params.patientId,
+      },
     });
     return res.json(labs);
   } catch (err) {
     console.log(err);
+  }
+});
+
+router.post("/labs/:patientId", async (req, res) => {
+  try {
+    const lab = await BasicMetabolicPanel.create({
+        where: {
+            patientId: req.params.patientId
+        },
+      glucose: req.body.glucose,
+      potassium: req.body.potassium,
+      calcium: req.body.calcium,
+      sodium: req.body.sodium,
+      co2: req.body.co2,
+      chloride: req.body.chloride,
+      bun: req.body.bun,
+      patientId: req.body.patientId,
+    });
+    return res.json(lab);
+  } catch (e) {
+    console.log(e);
   }
 });
 module.exports = router;

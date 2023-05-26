@@ -25,4 +25,26 @@ router.get("/patientdetails/:patientId", async (req, res) => {
   }
 });
 
+router.post("/patientdetails/:patientId", async (req, res) => {
+  try {
+    const patients = await patientDetails.create({
+      where: {
+        patientId: req.params.patientId,
+      },
+
+      patientId: req.body.patientId,
+      height: req.body.height,
+      heightType: req.body.heightType,
+      weight: req.body.weight,
+      weightType: req.body.weightType,
+      age: req.body.age,
+      sex: req.body.sex,
+      medicalHistory: req.body.medicalHistory,
+    });
+    return res.json(patients);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;

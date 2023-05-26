@@ -47,4 +47,41 @@ router.post("/patientdetails/:patientId", async (req, res) => {
   }
 });
 
+router.put("/patientdetails/:patientId", async (req, res) => {
+  try {
+    const patients = await patientDetails.findOne({
+      patientId: req.params.patientId,
+      id: req.params.id,
+    });
+    await patients.update({
+      patientId: req.body.patientId,
+      height: req.body.height,
+      heightType: req.body.heightType,
+      weight: req.body.weight,
+      weightType: req.body.weightType,
+      age: req.body.age,
+      sex: req.body.sex,
+      medicalHistory: req.body.medicalHistory,
+    });
+    return res.json(patients);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.delete("/patientdetails/:patientId", async (req, res) => {
+  try {
+    const patients = await patientDetails.findOne({
+      patientId: req.params.patientId,
+      id: req.params.id,
+    });
+    if (patients) {
+      patients.destroy();
+      res.json(`${patients.id} deleted successfully`);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;

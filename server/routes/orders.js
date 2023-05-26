@@ -44,4 +44,24 @@ router.post("/orders/:patientId", async (req, res) => {
     console.log(err);
   }
 });
+
+router.put("/orders/:patientId/:id", async (req, res) => {
+  try {
+    const orders = await ordersTable.findOne({
+      where: { patientId: req.params.patientId },
+    });
+    orders.update({
+      patientId: req.body.patientId,
+      providerId: req.body.providerId,
+      order: req.body.order,
+      orderTime: req.body.orderTime,
+      orderDate: req.body.orderDate,
+      fulfillmentTime: req.body.fulfillmentTime,
+      urgent: req.body.urgent,
+    });
+    res.json(orders);
+  } catch (err) {
+    console.log(err);
+  }
+});
 module.exports = router;

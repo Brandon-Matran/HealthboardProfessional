@@ -102,4 +102,5 @@ router.delete("/medications/:patientId/:id", async (req, res) => {
     }} catch(err){
         console.log(err);
     }})
+    
 module.exports = router;

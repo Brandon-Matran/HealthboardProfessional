@@ -9,6 +9,7 @@ const {
 const { medicationTable } = require("./tables/medicationTable");
 const { vitalsTable, patientDetails } = require("./tables/patientDataTable");
 const { ordersTable } = require("./tables/ordersTable");
+
 //Establish connections to routes
 const express = require("express");
 const app = express();
@@ -24,6 +25,8 @@ app.use("/", labRouter);
 const medRouter = require("./routes/medications")
 app.use("/", medRouter);
 
+const ordersRouter = require("./routes/orders")
+app.use("/", ordersRouter);
 // Establish sql database
 const sequelize = new Sequelize("root", "root", "root", {
   host: "postgres",

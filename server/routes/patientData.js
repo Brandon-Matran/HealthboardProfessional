@@ -84,4 +84,25 @@ router.delete("/patientdetails/:patientId", async (req, res) => {
   }
 });
 
+// Vitals ENDPOINTS //
+
+router.get("/vitals", async (req, res) => {
+  try {
+    vitals = await vitalsTable.findAll();
+    return res.json(vitals);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/vitals/:patientId", async (req, res) => {
+    try {
+      const vitals = await vitalsTable.findAndCountAll({
+        where: {patientId: req.params.patientId},
+      });
+      return res.json(vitals);
+    } catch (err) {
+      console.log(err);
+    }
+  });
 module.exports = router;

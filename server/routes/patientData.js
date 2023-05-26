@@ -122,4 +122,37 @@ router.post("/vitals/:patientId", async (req, res) => {
     console.log(err);
   }
 });
+
+router.put("/vitals/:patientId/:id", async (req, res) => {
+  try {
+    const vitals = await vitalsTable.findOne({
+      where: { patientId: req.params.patientId, id: req.params.id },
+    });
+    await vitals.update({
+      patientId: req.body.patientId,
+      vitalType: req.body.vitalType,
+      value: req.body.value,
+      unit: req.body.unit,
+      date: req.body.date,
+      time: req.body.time,
+    });
+    return res.json(vitals);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.delete("/vitals/:patientId/:id", async (req, res) => {
+  try {
+    const vitals = await vitalsTable.findOne({
+      where: { patientId: req.params.patientId, id: req.params.id },
+    });
+    if (vitals) {
+      vitals.destroy();
+      return res.json(`${vitals.id} successfully deleted`);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 module.exports = router;

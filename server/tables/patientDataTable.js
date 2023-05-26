@@ -26,7 +26,7 @@ const vitalsTable = sequelize.define("Vitals", {
         allowNull: false,
     },
     unit: {
-        type: DataTypes.ENUM("unit", "farenheit", "celsius", "mmHg", "%"),
+        type: DataTypes.ENUM("unit", "farenheit", "celsius", "mmHg", "%", "BPM"),
         allowNull: false,
     },
     date : {

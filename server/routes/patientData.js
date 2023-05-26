@@ -96,13 +96,30 @@ router.get("/vitals", async (req, res) => {
 });
 
 router.get("/vitals/:patientId", async (req, res) => {
-    try {
-      const vitals = await vitalsTable.findAndCountAll({
-        where: {patientId: req.params.patientId},
-      });
-      return res.json(vitals);
-    } catch (err) {
-      console.log(err);
-    }
-  });
+  try {
+    const vitals = await vitalsTable.findAndCountAll({
+      where: { patientId: req.params.patientId },
+    });
+    return res.json(vitals);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.post("/vitals/:patientId", async (req, res) => {
+  try {
+    const vitals = await vitalsTable.create({
+      where: { patientId: req.params.patientId },
+      patientId: req.body.patientId,
+      vitalType: req.body.vitalType,
+      value: req.body.value,
+      unit: req.body.unit,
+      date: req.body.date,
+      time: req.body.time,
+    });
+    return res.json(vitals);
+  } catch (err) {
+    console.log(err);
+  }
+});
 module.exports = router;

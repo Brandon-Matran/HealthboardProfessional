@@ -59,13 +59,13 @@ ordersTable.belongsTo(Healthcare_Provider, {foreignKey: "providerId"})
 //     try {
 //         await sequelize.sync()
 //         const order = await ordersTable.create({
-//             patientId: patientId,
-//             providerId: providerId,
-//             order: "NPO until surgery in the AM 5/12",
-//             orderTime: "15:00",
-//             orderDate: sequelize.literal("CURRENT_TIMESTAMP"),
-//             fulfillmentTime: "00:00",
-//             urgent: true,
+            // patientId: patientId,
+            // providerId: providerId,
+            // order: "NPO until surgery in the AM 5/12",
+            // orderTime: "15:00",
+            // orderDate: sequelize.literal("CURRENT_TIMESTAMP"),
+            // fulfillmentTime: "00:00",
+            // urgent: true,
 //         })
 //         console.log(`Successfully created ${order}`)
 //     }

@@ -19,12 +19,29 @@ router.get("/orders", async (req, res) => {
 router.get("/orders/:patientId", async (req, res) => {
   try {
     const orders = await ordersTable.findAndCountAll({
-        where: {patientId: req.params.patientId}});
+      where: { patientId: req.params.patientId },
+    });
     return res.json(orders);
   } catch (err) {
     console.log(err);
   }
 });
 
-r
+router.post("/orders/:patientId", async (req, res) => {
+  try {
+    const orders = await ordersTable.create({
+      where: { patientId: req.params.patientId },
+      patientId: req.body.patientId,
+      providerId: req.body.providerId,
+      order: req.body.order,
+      orderTime: req.body.orderTime,
+      orderDate: req.body.orderDate,
+      fulfillmentTime: req.body.fulfillmentTime,
+      urgent: req.body.urgent,
+    });
+    res.json(orders);
+  } catch (err) {
+    console.log(err);
+  }
+});
 module.exports = router;

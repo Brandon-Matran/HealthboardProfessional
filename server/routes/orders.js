@@ -48,7 +48,7 @@ router.post("/orders/:patientId", async (req, res) => {
 router.put("/orders/:patientId/:id", async (req, res) => {
   try {
     const orders = await ordersTable.findOne({
-      where: { patientId: req.params.patientId },
+      where: { patientId: req.params.patientId, id: req.params.id },
     });
     orders.update({
       patientId: req.body.patientId,
@@ -59,9 +59,24 @@ router.put("/orders/:patientId/:id", async (req, res) => {
       fulfillmentTime: req.body.fulfillmentTime,
       urgent: req.body.urgent,
     });
-    res.json(orders);
+
+    res.json({id: orders.id, orders: orders});
   } catch (err) {
     console.log(err);
   }
 });
+
+router.delete("/orders/:patientId/:id", async (req, res) => {
+    try {
+        const orders = await ordersTable.findOne({
+            where: {patientId: req.params.patientId, id: req.params.id},
+        })
+        orders.destroy()
+        res.json({"message": `Orders with ${orders.id} containing ${orders.order} deleted`})
+    }
+    catch (err) {
+        console.log(err);
+    }})
+
+
 module.exports = router;

@@ -27,6 +27,9 @@ app.use("/", medRouter);
 
 const ordersRouter = require("./routes/orders")
 app.use("/", ordersRouter);
+
+const patientDetailsRouter = require("./routes/patientData")
+app.use("/", patientDetailsRouter);
 // Establish sql database
 const sequelize = new Sequelize("root", "root", "root", {
   host: "postgres",

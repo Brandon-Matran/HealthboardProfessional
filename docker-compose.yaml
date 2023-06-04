@@ -28,11 +28,16 @@ services:
       - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
       - healthcare-professional-data:/var/lib/postgresql/data
 
-  healthboardprofessional:
-    build:
-      context: ./healthboardprofessional
-      dockerfile: Dockerfile
+  ghi:
+    image: node:lts-bullseye
+    command: /bin/bash run.sh
+    working_dir: /app
+    volumes:
+      - ./healthboardprofessional:/app
     ports:
       - "3000:3000"
     environment:
+      HOST_OS: ${OS}
       NODE_ENV: development
+      HOST: "0.0.0.0"
+      PUBLIC_URL: http://localhost:3000
